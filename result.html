@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Water Footprint Result</title>
+    <style>    
+        /* General Page Styling */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #2193b0 0%, #6dd5ed 100%);
+            position: relative;
+            overflow: hidden;
+            color: #fff;
+            animation: flyThroughBackground 1.5s ease-out forwards; /* Background fly-through animation */
+        }
+
+        /* Fly-through animation for background */
+        @keyframes flyThroughBackground {
+            0% {
+                transform: scale(0.8) translateZ(-200px);
+                opacity: 0;
+            }
+            100% {
+                transform: scale(1) translateZ(0);
+                opacity: 1;
+            }
+        }
+
+        /* Background wave and bubble effects */
+        .wave {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 0;
+            background: url('https://www.transparenttextures.com/patterns/asfalt-dark.png'), 
+                        radial-gradient(circle at 50% 150%, #007d9c, #4bb7e8);
+            opacity: 0.7;
+            animation: moveWaves 10s infinite linear;
+        }
+
+        @keyframes moveWaves {
+            0% { background-position: 0 0; }
+            100% { background-position: 100% 100%; }
+        }
+
+        .bubbles {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .bubble {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            bottom: -100px;
+            animation: rise 10s infinite ease-in;
+        }
+
+        .bubble:nth-child(1) {
+            width: 40px;
+            height: 40px;
+            left: 10%;
+            animation-duration: 8s;
+            animation-delay: 1s;
+        }
+
+        .bubble:nth-child(2) {
+            width: 60px;
+            height: 60px;
+            left: 50%;
+            animation-duration: 12s;
+            animation-delay: 3s;
+        }
+
+        .bubble:nth-child(3) {
+            width: 50px;
+            height: 50px;
+            left: 80%;
+            animation-duration: 6s;
+            animation-delay: 2s;
+        }
+
+        @keyframes rise {
+            0% { bottom: -100px; opacity: 0; }
+            50% { opacity: 1; }
+            100% { bottom: 100vh; opacity: 0; }
+        }
+
+        /* Fly-through effect for all page content */
+        @keyframes flyThroughContent {
+            0% {
+                transform: scale(0.8) translateZ(-200px);
+                opacity: 0;
+            }
+            100% {
+                transform: scale(1) translateZ(0);
+                opacity: 1;
+            }
+        }
+
+        /* Vessel and water */
+        .vessel-container {
+            position: relative;
+            width: 250px;
+            height: 350px;
+            background-color: rgba(255, 255, 255, 0.2);
+            border: 5px solid #006994;
+            border-radius: 20px;
+            overflow: hidden;
+            margin: 0 auto;
+            z-index: 1;
+            animation: flyThroughContent 1.5s ease-out forwards; /* Content fly-through animation */
+        }
+
+        .water {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 50%;
+            background: linear-gradient(180deg, #00aaff 0%, #007acc 100%);
+            animation: wave 4s infinite ease-in-out;
+        }
+
+        @keyframes wave {
+            0%, 100% { transform: translateY(0%); }
+            50% { transform: translateY(5%); }
+        }
+
+        .water-footprint-text {
+            position: absolute;
+            top: 15%;
+            width: 100%;
+            text-align: center;
+            font-size: 2rem;
+            font-weight: bold;
+            color: #fff;
+            z-index: 2;
+        }
+
+        /* Content box */
+        main {
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+            width: 90%;
+            max-width: 600px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
+            z-index: 2;
+            position: relative;
+            animation: flyThroughContent 1.5s ease-out forwards; /* Content fly-through animation */
+        }
+
+        h1, p, ul, footer {
+            animation: flyThroughContent 1.5s ease-out forwards;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+            margin: 20px 0;
+            font-size: 1.2rem;
+        }
+
+        h2 {
+            font-size: 2rem;
+            color: #00ffcc;
+        }
+
+        footer {
+            margin-top: 20px;
+            text-align: center;
+            z-index: 2;
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- Waves and bubbles background -->
+    <div class="wave"></div>
+    <div class="bubbles">
+        <div class="bubble"></div>
+        <div class="bubble"></div>
+        <div class="bubble"></div>
+    </div>
+
+    <main>
+        <header>
+            <h1>Water Footprint Result</h1>
+        </header>
+
+        <p>Thank you for submitting the product details. Based on the information you entered:</p>
+
+        <ul>
+            <li>Product Type: <span id="result-product-type">Guava</span></li>
+            <li>Product Name: <span id="result-product-name">Guava</span></li>
+            <li>Product Weight: <span id="result-product-weight">1</span> kg</li>
+        </ul>
+
+        <!-- Vessel with moving water -->
+        <div class="vessel-container">
+            <div class="water-footprint-text">
+                Water Footprint: <span id="water-footprint">46.2</span> 
+            </div>
+            <div class="water"></div>
+        </div>
+    </main>
+
+   
+    <script>
+        // Simulate receiving data via POST and calculating the water footprint
+        window.onload = function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const productType = urlParams.get('product-type') || 'Guava';
+            const productName = urlParams.get('product-name') || 'Guava';
+            const productWeight = urlParams.get('product-weight') || '1';
+
+            // Display the data in the result fields
+            document.getElementById('result-product-type').textContent = productType;
+            document.getElementById('result-product-name').textContent = productName;
+            document.getElementById('result-product-weight').textContent = productWeight;
+
+            // Set a static water footprint value for the guava
+            document.getElementById('water-footprint').textContent = '46.2 m³';
+        };
+    </script>
+</body>
+</html>
